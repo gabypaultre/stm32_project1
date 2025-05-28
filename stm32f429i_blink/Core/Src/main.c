@@ -89,6 +89,9 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("Hello depuis STM32 via ITM/SWO !\n");
 
+  uint32_t now = 0;
+  uint32_t last = 0;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -98,6 +101,14 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+    now = HAL_GetTick();
+    if (now - last >= 1000) // Toggle every second
+    {
+      HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
+      last = now;
+      printf("Toggled LD4!\n");
+    }
+
   }
   /* USER CODE END 3 */
 }
