@@ -429,6 +429,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  if (GPIO_Pin == B1_Pin)
+  {
+    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    printf("Button pressed, toggling LD3!\n");
+  }
+}
+
 
 /* USER CODE END 4 */
 
