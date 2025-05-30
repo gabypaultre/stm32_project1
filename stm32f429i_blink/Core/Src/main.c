@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include "L3GD20.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -56,18 +57,6 @@ static void MX_SPI5_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-uint8_t L3GD20_ReadWhoAmI(void)
-{
-  uint8_t tx = 0x8F; // 0x0F | 0x80 (lecture SPI)
-  uint8_t rx = 0x00;
-
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_RESET); // NCS low
-  HAL_SPI_Transmit(&hspi5, &tx, 1, HAL_MAX_DELAY);       // Envoi de l'adresse
-  HAL_SPI_Receive(&hspi5, &rx, 1, HAL_MAX_DELAY);        // Lecture de la réponse
-  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_1, GPIO_PIN_SET);    // NCS high
-
-  return rx;
-}
 
 /* USER CODE END 0 */
 
@@ -102,9 +91,10 @@ int main(void)
   MX_GPIO_Init();
   MX_SPI5_Init();
   /* USER CODE BEGIN 2 */
-  printf("Hello depuis STM32 via ITM/SWO !\n");
+  // Initialize L3GD20
+  L3GD20_Init(&hspi5, NCS_MEMS_SPI_GPIO_Port, NCS_MEMS_SPI_Pin);
+  L3GD20_EnableDefault();
 
-  printf("Test WHO_AM_I...\n");
   uint8_t who = L3GD20_ReadWhoAmI();
   printf("WHO_AM_I = 0x%02X\n", who);
 
@@ -126,6 +116,13 @@ int main(void)
       HAL_GPIO_TogglePin(LD4_GPIO_Port, LD4_Pin);
       last = now;
       // printf("Toggled LD4!\n");
+
+      L3GD20_Axes axes = L3GD20_ReadAxes();
+      printf("X: %d, Y: %d, Z: %d\n", axes.x, axes.y, axes.z);
+
+      L3GD20_Angles angles = L3GD20_ReadAngularVelocity();
+      printf("Gyro: X=%.2f dps, Y=%.2f dps, Z=%.2f dps\n", angles.x_dps, angles.y_dps, angles.z_dps);
+
     }
 
   }

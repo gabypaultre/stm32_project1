@@ -1,0 +1,5 @@
+../Core/Src/L3GD20.c:9:6:L3GD20_Init	1
+../Core/Src/L3GD20.c:17:9:L3GD20_ReadWhoAmI	1
+../Core/Src/L3GD20.c:31:6:L3GD20_EnableDefault	1
+../Core/Src/L3GD20.c:43:13:L3GD20_ReadAxes	1
+../Core/Src/L3GD20.c:62:15:L3GD20_ReadAngularVelocity	1

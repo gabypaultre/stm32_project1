@@ -61,7 +61,7 @@ main-build: stm32f429i_blink.elf secondary-outputs
 
 # Tool invocations
 stm32f429i_blink.elf stm32f429i_blink.map: $(OBJS) $(USER_OBJS) C:\Users\pault\STM32CubeIDE\workspace_1.18.1\stm32_project1\stm32f429i_blink\STM32F429ZITX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "stm32f429i_blink.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\pault\STM32CubeIDE\workspace_1.18.1\stm32_project1\stm32f429i_blink\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f429i_blink.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "stm32f429i_blink.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\pault\STM32CubeIDE\workspace_1.18.1\stm32_project1\stm32f429i_blink\STM32F429ZITX_FLASH.ld" --specs=nosys.specs -Wl,-Map="stm32f429i_blink.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
