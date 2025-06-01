@@ -1,0 +1,7 @@
+../Core/Src/I3G4250D.c:7:9:I3G4250D_Init	1
+../Core/Src/I3G4250D.c:16:6:I3G4250D_Configure	1
+../Core/Src/I3G4250D.c:22:9:I3G4250D_ReadRegister	1
+../Core/Src/I3G4250D.c:33:6:I3G4250D_WriteRegister	1
+../Core/Src/I3G4250D.c:41:9:I3G4250D_ReadWhoAmI	1
+../Core/Src/I3G4250D.c:46:6:I3G4250D_ReadXYZ	1
+../Core/Src/I3G4250D.c:59:6:I3G4250D_ReadXYZ_dps	1
